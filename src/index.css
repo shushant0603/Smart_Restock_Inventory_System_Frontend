@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #1f2937;
+  background: #f3f4f6;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+html {
+  background: #f3f4f6;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+img,
+svg {
+  display: block;
+}
