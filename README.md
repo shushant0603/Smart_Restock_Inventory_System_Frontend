@@ -13,6 +13,7 @@ SmartStock is a modern, AI-assisted Inventory Management Dashboard designed for 
 - **📱 Responsive Design**: Fully responsive layout with an off-canvas mobile sidebar menu.
 - **✨ Fluid Animations**: Premium UI feel with GSAP-powered hover effects, page transitions, and element reveals.
 
+
 ## 🛠️ Technology Stack
 
 - **Framework**: React 18
@@ -61,3 +62,12 @@ src/
 
 ## 🎨 Design Philosophy
 The UI focuses on a clean, premium aesthetic with subtle micro-interactions. It utilizes a soft color palette with distinct accent colors for statuses (Emerald for healthy, Amber for warnings, Red for critical) to ensure data is scannable at a glance.
+
+## 🤝 Team Members & Contributions
+This project was developed by our amazing team. You can find our GitHub profiles below:
+
+- [Shushant Kumar](https://github.com/shushant0603)
+- [Chinmoy Roy](https://github.com/Chinmoy-Roy9547)
+- [Goutam Dogra](https://github.com/goutamdogri)
+- [Soham bhattacharjee](https://github.com/Soh-am)
+- [Priya Gupta](https://github.com/priyagupta35)

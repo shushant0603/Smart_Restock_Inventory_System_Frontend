@@ -4,7 +4,7 @@ import AppRoutes from "./routes/AppRoutes";
 import { useInventoryStore } from "./store/useInventoryStore";
 import { useDashboardStore } from "./store/dashboardStore";
 
-const socket = io("http://localhost:3000");
+const socket = io(import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_BASE || "http://localhost:3000");
 
 const App = () => {
   const updateProductStock = useInventoryStore((state) => state.updateProductStock);
