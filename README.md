@@ -68,6 +68,6 @@ This project was developed by our amazing team. You can find our GitHub profiles
 
 - [Shushant Kumar](https://github.com/shushant0603)
 - [Chinmoy Roy](https://github.com/Chinmoy-Roy9547)
-- [Goutam Dogra](https://github.com/goutamdogri)
+- [Goutam Dogri](https://github.com/goutamdogri)
 - [Soham bhattacharjee](https://github.com/Soh-am)
 - [Priya Gupta](https://github.com/priyagupta35)
