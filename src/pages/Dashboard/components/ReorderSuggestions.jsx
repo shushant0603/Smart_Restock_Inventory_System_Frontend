@@ -28,7 +28,7 @@ export default function ReorderSuggestions() {
 			
 			resolveAlert(suggestion.id);
 			setTimeout(() => {
-				fetchDashboard();
+				fetchDashboard(true);
 			}, 1000);
 		} catch (error) {
 			console.error("Failed to process suggestion:", error);
@@ -48,7 +48,7 @@ export default function ReorderSuggestions() {
 				</div>
 				<div>
 					<h2 className="text-lg font-bold text-gray-900">Smart Suggestions</h2>
-					<p className="text-sm text-gray-500">AI-driven reorder recommendations based on your formula</p>
+					<p className="text-sm text-gray-500">Reorder recommendations based on your formula</p>
 				</div>
 			</div>
 

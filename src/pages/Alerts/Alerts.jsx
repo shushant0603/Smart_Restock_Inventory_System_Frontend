@@ -92,8 +92,8 @@ function Alerts() {
 		
 		// Add a short delay to allow the backend background event loop to finish marking the alert as RESOLVED
 		setTimeout(() => {
-			fetchDashboard();
-			useInventoryStore.getState().fetchProducts();
+			fetchDashboard(true);
+			useInventoryStore.getState().fetchProducts(true);
 		}, 1000);
 	};
 

@@ -30,7 +30,7 @@ function Suggestions() {
 			});
 			
 			resolveAlert(suggestion.id);
-			setTimeout(() => fetchDashboard(), 1000);
+			setTimeout(() => fetchDashboard(true), 1000);
 		} catch (error) {
 			console.error("Failed to process suggestion:", error);
 			window.alert(`Failed to order ${suggestion.product?.name}`);
@@ -63,7 +63,7 @@ function Suggestions() {
 			);
 			
 			await Promise.allSettled(promises);
-			setTimeout(() => fetchDashboard(), 1000);
+			setTimeout(() => fetchDashboard(true), 1000);
 		} finally {
 			setIsProcessingAll(false);
 			setProcessingIds(new Set());
@@ -94,14 +94,14 @@ function Suggestions() {
 						Smart Suggestions
 					</h1>
 					<p className="mt-2 text-sm text-gray-500">
-						AI-driven reorder recommendations based on your Average Daily Usage and Lead Time formulas.
+						Smart reorder recommendations based on your Average Daily Usage and Lead Time formulas.
 					</p>
 				</div>
 				
 				<div className="flex items-center gap-3">
 					<button
 						type="button"
-						onClick={() => fetchDashboard()}
+						onClick={() => fetchDashboard(true)}
 						className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 active:scale-[0.97]"
 					>
 						<RefreshCw className="h-4 w-4" />

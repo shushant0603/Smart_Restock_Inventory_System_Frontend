@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { getDashboard } from "../services/dashboardService";
 
-export const useDashboardStore = create((set) => ({
+export const useDashboardStore = create((set, get) => ({
 	dashboardStats: null,
 	inventoryStatusTrend: null, // this will now hold { overall, products: {} }
 	activeAlerts: [],
@@ -12,7 +12,8 @@ export const useDashboardStore = create((set) => ({
 	loading: false,
 	error: null,
 
-	fetchDashboard: async () => {
+	fetchDashboard: async (force = false) => {
+		if (!force && get().dashboardStats) return;
 		try {
 			set({
 				loading: true,

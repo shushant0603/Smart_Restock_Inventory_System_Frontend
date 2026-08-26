@@ -2,9 +2,11 @@ import TransactionTypeBadge from "./TransactionTypeBadge";
 
 function TransactionRow({ transaction }) {
 	const {
+		createdAt,
 		date,
 		product,
 		type,
+		quantity,
 		qtyChange,
 		prevStock,
 		newStock,
@@ -12,14 +14,19 @@ function TransactionRow({ transaction }) {
 	} = transaction;
 
 	const formattedDate = new Date(
-		date
+		createdAt || date
 	).toLocaleDateString("en-US", {
 		month: "short",
 		day: "numeric",
 		year: "numeric",
 	});
 
-	const isPositive = qtyChange > 0;
+	const isPositive = type === "RECEIPT";
+	const displayQty = qtyChange || quantity;
+	const displayProduct = product?.name || product || "Unknown";
+	const displayPrevStock = prevStock ?? "-";
+	const displayNewStock = newStock ?? "-";
+	const displayUser = user || "System";
 
 	return (
 		<div className="grid grid-cols-[1.15fr_1.7fr_1fr_1fr_1fr_1fr_1fr] items-center border-t border-gray-200 px-8 py-5">
@@ -32,7 +39,7 @@ function TransactionRow({ transaction }) {
 			{/* Product */}
 
 			<div className="pr-4 text-sm font-semibold text-gray-900">
-				{product}
+				{displayProduct}
 			</div>
 
 			{/* Type */}
@@ -50,26 +57,26 @@ function TransactionRow({ transaction }) {
 						: "text-red-600"
 				}`}
 			>
-				{isPositive ? "+" : ""}
-				{qtyChange}
+				{isPositive ? "+" : "-"}
+				{displayQty}
 			</div>
 
 			{/* Previous Stock */}
 
 			<div className="text-sm text-gray-500">
-				{prevStock}
+				{displayPrevStock}
 			</div>
 
 			{/* New Stock */}
 
 			<div className="text-sm font-semibold text-gray-900">
-				{newStock}
+				{displayNewStock}
 			</div>
 
 			{/* User */}
 
 			<div className="text-sm text-gray-500">
-				{user}
+				{displayUser}
 			</div>
 		</div>
 	);

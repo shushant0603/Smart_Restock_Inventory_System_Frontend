@@ -1,7 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { login as loginApi, signup as signupApi, getCurrentUser } from "../services/authService";
-
+import { useDashboardStore } from "./dashboardStore";
+import { useInventoryStore } from "./useInventoryStore";
+import { useSupplierStore } from "./useSupplierStore";
+import { useTransaction } from "./useTransactionStore";
 const useAuthStore = create(
   persist(
     (set, get) => ({
@@ -42,6 +45,10 @@ const useAuthStore = create(
 
       logout: () => {
         set({ user: null, token: null, error: null });
+        useDashboardStore.setState({ dashboardStats: null, inventoryStatusTrend: null, activeAlerts: [], recentActivity: [], suggestions: [], products: [] });
+        useInventoryStore.setState({ products: [] });
+        useSupplierStore.setState({ suppliers: [] });
+        useTransaction.setState({ transactions: [] });
       },
 
       fetchCurrentUser: async () => {

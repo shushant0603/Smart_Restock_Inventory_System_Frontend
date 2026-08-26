@@ -1,16 +1,5 @@
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:3000";
+import { request } from "./services/api";
 
-async function request(path, options = {}) {
-  const url = `${API_BASE}${path}`;
-  const res = await fetch(url, options);
-  const contentType = res.headers.get("content-type") || "";
-  if (!res.ok) {
-    const text = contentType.includes("application/json") ? await res.json() : await res.text();
-    throw new Error((text && text.message) || JSON.stringify(text));
-  }
-  if (contentType.includes("application/json")) return res.json();
-  return res.text();
-}
 
 export const getProducts = () => request("/api/products");
 export const createProduct = (payload) =>

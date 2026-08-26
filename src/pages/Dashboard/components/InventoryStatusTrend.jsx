@@ -17,6 +17,7 @@ function InventoryStatusTrend() {
 
 	const [period, setPeriod] = useState("monthly");
 	const [selectedProduct, setSelectedProduct] = useState("overall");
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
 	const cardRef = useRef(null);
 	const chartRef = useRef(null);
@@ -154,18 +155,45 @@ function InventoryStatusTrend() {
 					</p>
 				</div>
 
-				<select
-					value={selectedProduct}
-					onChange={(e) => setSelectedProduct(e.target.value)}
-					className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-				>
-					<option value="overall">Overall (All Products)</option>
-					{products.map((p) => (
-						<option key={p.id} value={p.id}>
-							{p.name}
-						</option>
-					))}
-				</select>
+				<div className="relative">
+					<button
+						type="button"
+						onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+						onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
+						className="flex w-full min-w-[220px] items-center justify-between gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+					>
+						<span className="truncate">
+							{selectedProduct === "overall" 
+								? "Overall (All Products)" 
+								: products.find((p) => String(p.id) === String(selectedProduct))?.name || "Unknown Product"}
+						</span>
+						<svg className="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+							<path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+						</svg>
+					</button>
+
+					{isDropdownOpen && (
+						<div className="absolute right-0 z-10 mt-1 max-h-60 w-full min-w-[220px] overflow-y-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
+							<button
+								type="button"
+								onClick={() => { setSelectedProduct("overall"); setIsDropdownOpen(false); }}
+								className={`block w-full px-4 py-2 text-left text-sm ${selectedProduct === "overall" ? "bg-gray-100 font-semibold text-gray-900" : "text-gray-700 hover:bg-gray-50"}`}
+							>
+								Overall (All Products)
+							</button>
+							{products.map((p) => (
+								<button
+									key={p.id}
+									type="button"
+									onClick={() => { setSelectedProduct(p.id); setIsDropdownOpen(false); }}
+									className={`block w-full px-4 py-2 text-left text-sm truncate ${String(selectedProduct) === String(p.id) ? "bg-gray-100 font-semibold text-gray-900" : "text-gray-700 hover:bg-gray-50"}`}
+								>
+									{p.name}
+								</button>
+							))}
+						</div>
+					)}
+				</div>
 			</div>
 
 			{/* ================= TABS ================= */}

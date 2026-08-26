@@ -32,10 +32,10 @@ function AlertCard({ alert, onReorder, onResolve }) {
 					<div>
 						<div className="flex items-center gap-2.5">
 							<h3 className="text-sm font-semibold text-gray-900">
-								{alert.productName}
+								{alert.product?.name || "Unknown Product"}
 							</h3>
 
-							<AlertStatusBadge severity={isResolved ? "resolved" : alert.severity} />
+							<AlertStatusBadge severity={isResolved ? "resolved" : (alert.currentStock === 0 ? "out_of_stock" : "low_stock")} />
 						</div>
 
 						<p className="mt-1 text-sm text-gray-500">
@@ -46,13 +46,13 @@ function AlertCard({ alert, onReorder, onResolve }) {
 							{" · "}
 							Threshold
 							<span className="font-semibold text-gray-800">
-								{alert.threshold} units
+								{alert.minimumStock} units
 							</span>
 						</p>
 
 						<p className="mt-1.5 flex items-center gap-1 text-xs text-gray-400">
 							<Clock className="h-3 w-3" />
-							Triggered {alert.triggeredAt}
+							Triggered {new Date(alert.createdAt).toLocaleString()}
 						</p>
 					</div>
 				</div>

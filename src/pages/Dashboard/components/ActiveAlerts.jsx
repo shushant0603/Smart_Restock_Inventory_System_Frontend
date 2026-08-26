@@ -31,30 +31,35 @@ function ActiveAlerts() {
 						<div className="flex items-start gap-3">
 							<TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-gray-800" />
 
-							<div className="min-w-0 flex-1">
-								<div className="flex items-start justify-between gap-2">
-									<p className="text-xs font-semibold text-gray-900">
-										{alert.sku}
-									</p>
-
-									<span className="h-1 w-3 rounded-full bg-blue-500" />
+							<div className="flex-1 min-w-0">
+								<div className="flex items-center gap-2 text-xs">
+									<span className="font-medium text-red-600">
+										Alert #{alert.id}
+									</span>
+									<span className="text-gray-400">&bull;</span>
+									<span className="text-gray-500 uppercase">
+										{alert.product?.id ? `SKU-${alert.product.id}` : ''}
+									</span>
 								</div>
 
-								<p className="mt-0.5 text-xs font-medium text-gray-900">
-									{alert.productName}
-								</p>
-
-								<p className="mt-1 text-[11px] leading-4 text-gray-500">
-									{alert.severity === "out_of_stock"
+								<div className="mt-1">
+									<p className="font-medium text-gray-900">
+										{alert.product?.name || "Unknown Product"}
+									</p>
+									<p className="mt-0.5 text-gray-500">
+									{alert.currentStock === 0
 										? `Stock depleted — ${alert.currentStock} units remaining`
-										: alert.severity === "critical"
-										? `Critical — only ${alert.currentStock} units left (threshold: ${alert.threshold})`
+										: alert.type === "LOW_STOCK"
+										? `Critical — only ${alert.currentStock} units left (minimum: ${alert.minimumStock})`
 										: `Low stock — ${alert.currentStock} units remaining`}
-								</p>
+									</p>
+								</div>
+							</div>
 
-								<p className="mt-1 text-[10px] text-gray-500">
-									{alert.triggeredAt}
-								</p>
+							<div className="flex shrink-0 flex-col items-end gap-2 text-xs text-gray-500">
+								<span className="whitespace-nowrap">
+									{new Date(alert.createdAt).toLocaleDateString()}
+								</span>
 							</div>
 						</div>
 					</div>

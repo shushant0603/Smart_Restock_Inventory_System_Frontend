@@ -6,7 +6,8 @@ import { createTransaction } from "../../../api";
 export default function ReorderModal({ alert, onClose, onSuccess }) {
 	const modalRef = useRef(null);
 	const contentRef = useRef(null);
-	const [quantity, setQuantity] = useState("10");
+	const defaultQty = Math.max(10, (alert.minimumStock || 0) - (alert.currentStock || 0) + 5);
+	const [quantity, setQuantity] = useState(defaultQty.toString());
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [error, setError] = useState(null);
 

@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { useInventoryStore } from "../../../store/useInventoryStore";
+import { useSupplierStore } from "../../../store/useSupplierStore";
 
 function AddProductModal({ isOpen, onClose }) {
 	const addProduct = useInventoryStore((state) => state.addProduct);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
+	const { suppliers, fetchSuppliers } = useSupplierStore();
+
+	useEffect(() => {
+		if (isOpen) {
+			fetchSuppliers();
+		}
+	}, [isOpen, fetchSuppliers]);
+
+	const [isCustomSupplier, setIsCustomSupplier] = useState(false);
 
 	const [formData, setFormData] = useState({
 		name: "",
@@ -163,17 +173,48 @@ function AddProductModal({ isOpen, onClose }) {
 					</div>
 
 					<div>
-						<label className="mb-1 block text-sm font-medium text-gray-700">
-							Supplier *
-						</label>
-						<input
-							type="text"
-							name="supplier"
-							required
-							value={formData.supplier}
-							onChange={handleChange}
-							className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-						/>
+						<div className="mb-1 flex items-center justify-between">
+							<label className="block text-sm font-medium text-gray-700">
+								Supplier *
+							</label>
+							<button
+								type="button"
+								onClick={() => {
+									setIsCustomSupplier(!isCustomSupplier);
+									setFormData(prev => ({ ...prev, supplier: "" }));
+								}}
+								className="text-xs font-medium text-blue-600 hover:text-blue-700"
+							>
+								{isCustomSupplier ? "Select existing" : "+ Add new supplier"}
+							</button>
+						</div>
+						
+						{isCustomSupplier ? (
+							<input
+								type="text"
+								name="supplier"
+								required
+								placeholder="Type new supplier name..."
+								value={formData.supplier}
+								onChange={handleChange}
+								className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+							/>
+						) : (
+							<select
+								name="supplier"
+								required
+								value={formData.supplier}
+								onChange={handleChange}
+								className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+							>
+								<option value="" disabled>Select a supplier</option>
+								{suppliers.map((s, idx) => (
+									<option key={s.id || s._id || idx} value={s.name}>
+										{s.name}
+									</option>
+								))}
+							</select>
+						)}
 					</div>
 
 					<div className="mt-6 flex justify-end gap-3">

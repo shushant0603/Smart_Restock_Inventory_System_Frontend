@@ -20,6 +20,7 @@ const topLinks = [
 	{ label: "Alerts", path: "/alerts", icon: AlertCircle, badgeKey: "alerts" },
 	{ label: "Suggestions", path: "/suggestions", icon: Lightbulb, badgeKey: "suggestions" },
 	{ label: "Transactions", path: "/transactions", icon: ArrowRightLeft },
+	{ label: "Orders", path: "/orders", icon: ShoppingCart },
 	{ label: "Suppliers", path: "/suppliers", icon: Truck },
 ];
 

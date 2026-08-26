@@ -6,7 +6,8 @@ export const useInventoryStore = create((set, get) => ({
 	loading: false,
 	error: null,
 
-	fetchProducts: async () => {
+	fetchProducts: async (force = false) => {
+		if (!force && get().products.length > 0) return;
 		try {
 			set({ loading: true, error: null });
 			const data = await getProducts();

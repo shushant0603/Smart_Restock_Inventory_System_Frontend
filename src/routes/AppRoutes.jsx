@@ -9,6 +9,8 @@ import Suppliers from "../pages/Suppliers/Suppliers";
 import Settings from "../pages/Settings/Settings";
 import Transactions from "../pages/Transactions/Transactions";
 import Suggestions from "../pages/Suggestions/Suggestions";
+import Buy from "../pages/Buy/Buy";
+import Orders from "../pages/Orders/Orders";
 import useAuthStore from "../store/authStore";
 
 const ProtectedRoute = ({ children }) => {
@@ -38,8 +40,10 @@ function AppRoutes() {
 				<Route path="/transactions" element={<Transactions />} />
 				<Route path="/alerts" element={<Alerts />} />
 				<Route path="/suggestions" element={<Suggestions />} />
+				<Route path="/orders" element={<Orders />} />
 				<Route path="/suppliers" element={<Suppliers />} />
 				<Route path="/settings" element={<Settings />} />
+				<Route path="/buy" element={<Buy />} />
 			</Route>
 			<Route path="/" element={<Navigate to="/login" replace />} />
 			<Route path="*" element={<Navigate to="/dashboard" replace />} />

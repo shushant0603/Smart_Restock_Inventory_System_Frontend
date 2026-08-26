@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { getTransactions } from "../services/transactionService";
 
-export const useTransaction = create((set) => ({
+export const useTransaction = create((set, get) => ({
 	transactions: [],
 	loading: false,
 	error: null,
 
-	fetchTransactions: async () => {
+	fetchTransactions: async (force = false) => {
+		if (!force && get().transactions.length > 0) return;
 		try {
 			set({
 				loading: true,

@@ -70,7 +70,7 @@ function Transactions() {
 				(transaction) => {
 					const transactionDate =
 						new Date(
-							transaction.date
+							transaction.createdAt || transaction.date
 						);
 
 					return (

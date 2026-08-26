@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { Truck, Search, Plus, MapPin, Mail, Phone } from 'lucide-react';
+import { useSupplierStore } from '../../store/useSupplierStore';
 
 const Suppliers = () => {
-  const [suppliers, setSuppliers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { suppliers, loading, fetchSuppliers } = useSupplierStore();
 
   useEffect(() => {
-    const fetchSuppliers = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/suppliers');
-        setSuppliers(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching suppliers:', error);
-        setLoading(false);
-      }
-    };
     fetchSuppliers();
-  }, []);
+  }, [fetchSuppliers]);
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
