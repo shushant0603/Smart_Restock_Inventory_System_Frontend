@@ -102,7 +102,7 @@ function AuthForm() {
             <HeartPulse className="h-4 w-4" />
           </div>
           <div className="text-left leading-tight overflow-hidden">
-            <p className={`text-xs md:text-sm font-bold whitespace-nowrap truncate ${workspace === 'MedCare' ? 'text-white' : 'text-gray-900'}`}>MedCare Tower</p>
+            <p className={`text-xs md:text-sm font-bold whitespace-nowrap truncate ${workspace === 'MedCare' ? 'text-white' : 'text-gray-900'}`}>Planning manager</p>
           </div>
         </button>
       </div>

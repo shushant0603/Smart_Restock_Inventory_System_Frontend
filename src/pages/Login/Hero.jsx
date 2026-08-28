@@ -264,7 +264,7 @@ function Hero() {
         "
       >
         <span>
-          © 2025 SmartStock Inc.
+          © 2026 SmartStock Inc.
         </span>
 
         <div className="flex gap-4">
