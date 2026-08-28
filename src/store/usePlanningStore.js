@@ -1,7 +1,5 @@
 import { create } from "zustand";
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+import { request } from "../services/api";
 
 export const usePlanningStore = create((set, get) => ({
 	requests: [],
@@ -14,8 +12,8 @@ export const usePlanningStore = create((set, get) => ({
 
 		set({ loading: true, error: null });
 		try {
-			const res = await axios.get(`${API_URL}/planning`);
-			set({ requests: res.data, loading: false });
+			const res = await request("/api/planning");
+			set({ requests: res, loading: false });
 		} catch (err) {
 			console.error("Failed to fetch planning requests:", err);
 			set({ error: err.message, loading: false });
@@ -31,12 +29,12 @@ export const usePlanningStore = create((set, get) => ({
 				),
 			}));
 			
-			await axios.patch(`${API_URL}/planning/${id}/status`, {
-				status: "Accepted"
+			await request(`/api/planning/${id}/status`, {
+				method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "Accepted" })
 			});
 			
-			// Optional: refresh from backend
-			// get().fetchRequests();
 		} catch (error) {
 			console.error("Failed to accept request:", error);
 			// Revert optimistic update (simplified)
@@ -53,9 +51,10 @@ export const usePlanningStore = create((set, get) => ({
 				),
 			}));
 			
-			await axios.patch(`${API_URL}/planning/${id}/status`, {
-				status: "Unable to Fulfill",
-				reason
+			await request(`/api/planning/${id}/status`, {
+				method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "Unable to Fulfill", reason })
 			});
 		} catch (error) {
 			console.error("Failed to reject request:", error);
