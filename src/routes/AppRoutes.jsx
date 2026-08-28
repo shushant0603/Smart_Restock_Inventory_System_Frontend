@@ -11,6 +11,7 @@ import Transactions from "../pages/Transactions/Transactions";
 import Suggestions from "../pages/Suggestions/Suggestions";
 import Buy from "../pages/Buy/Buy";
 import Orders from "../pages/Orders/Orders";
+import PlanningRequestsPage from "../pages/PlanningRequests/PlanningRequests";
 import useAuthStore from "../store/authStore";
 
 const ProtectedRoute = ({ children }) => {
@@ -44,6 +45,7 @@ function AppRoutes() {
 				<Route path="/suppliers" element={<Suppliers />} />
 				<Route path="/settings" element={<Settings />} />
 				<Route path="/buy" element={<Buy />} />
+				<Route path="/planning-requests" element={<PlanningRequestsPage />} />
 			</Route>
 			<Route path="/" element={<Navigate to="/login" replace />} />
 			<Route path="*" element={<Navigate to="/dashboard" replace />} />

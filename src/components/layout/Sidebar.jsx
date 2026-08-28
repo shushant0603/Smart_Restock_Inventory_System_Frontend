@@ -8,15 +8,18 @@ import {
 	Settings,
 	Layers,
 	Truck,
-	Lightbulb
+	Lightbulb,
+	ClipboardList
 } from "lucide-react";
 import { useDashboardStore } from "../../store/dashboardStore";
+import { usePlanningStore } from "../../store/usePlanningStore";
 import useAuthStore from "../../store/authStore";
 import gsap from "gsap";
 
 const topLinks = [
 	{ label: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
 	{ label: "Inventory", path: "/inventory", icon: Package },
+	{ label: "Planning Requests", path: "/planning-requests", icon: ClipboardList, badgeKey: "planning" },
 	{ label: "Alerts", path: "/alerts", icon: AlertCircle, badgeKey: "alerts" },
 	{ label: "Suggestions", path: "/suggestions", icon: Lightbulb, badgeKey: "suggestions" },
 	{ label: "Transactions", path: "/transactions", icon: ArrowRightLeft },
@@ -27,10 +30,13 @@ const topLinks = [
 function Sidebar({ isOpen, onClose }) {
 	const alerts = useDashboardStore((state) => state.activeAlerts);
 	const suggestions = useDashboardStore((state) => state.suggestions);
+	const requests = usePlanningStore((state) => state.requests);
+	const planningRequests = requests?.filter(r => r.status === "New") || [];
 	
 	const counts = {
 		alerts: alerts?.length ?? 0,
-		suggestions: suggestions?.length ?? 0
+		suggestions: suggestions?.length ?? 0,
+		planning: planningRequests?.length ?? 0
 	};
 
 	const handleMouseEnter = (e) => {
@@ -104,7 +110,7 @@ function Sidebar({ isOpen, onClose }) {
 											className={`flex h-5 items-center justify-center rounded-md px-1.5 text-xs font-bold ${
 												isActive
 													? "bg-white text-blue-600"
-													: badgeKey === "alerts" ? "bg-red-600 text-white" : "bg-amber-500 text-white"
+													: badgeKey === "alerts" ? "bg-red-600 text-white" : badgeKey === "planning" ? "bg-red-600 text-white" : "bg-amber-500 text-white"
 											}`}
 										>
 											{counts[badgeKey]}

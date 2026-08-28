@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replenishment Manager (P1)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold tracking-tight text-gray-950">
+                Replenishment
+            </h1>
+            <p class="mt-2 text-gray-500">
+                You are currently in the Replenishment Manager workspace (P1).
+            </p>
+        </div>
+
+        <!-- Workspace Toggle -->
+        <div class="mb-8 flex rounded-2xl bg-gray-50/80 p-1 border border-gray-100 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
+            <button
+                type="button"
+                onclick="window.location.href='/'"
+                class="flex-1 flex items-center justify-center gap-2 rounded-xl p-2 transition-all duration-300 hover:bg-white text-gray-500 hover:text-gray-900 cursor-pointer text-left"
+            >
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-500">
+                    <i data-lucide="package" class="h-4 w-4"></i>
+                </div>
+                <div class="leading-tight overflow-hidden">
+                    <p class="text-xs md:text-sm font-bold whitespace-nowrap truncate text-gray-900">Inventory Manager</p>
+                    <!-- <p class="text-[10px] text-gray-500">E1 • Monitor Inventory</p> -->
+                </div>
+            </button>
+
+            <button
+                type="button"
+                class="flex-1 flex items-center justify-center gap-2 rounded-xl p-2 transition-all duration-300 bg-[#5B5EFE] text-white shadow-md shadow-indigo-200 cursor-default text-left"
+            >
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/20">
+                    <i data-lucide="clipboard-check" class="h-4 w-4"></i>
+                </div>
+                <div class="leading-tight overflow-hidden">
+                    <p class="text-xs md:text-sm font-bold whitespace-nowrap truncate text-white">Replenishment Manager</p>
+                    <!-- <p class="text-[10px] text-indigo-100">P1 • Plan replenishment</p> -->
+                </div>
+            </button>
+        </div>
+        
+        <p class="mb-6 text-xs text-gray-500 text-center">Click on Inventory Manager to switch back to E1.</p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

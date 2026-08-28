@@ -22,7 +22,9 @@ function Login() {
       ========================================= */}
 
       <section className="flex h-screen items-center justify-center overflow-hidden bg-white px-6 py-12">
-        <AuthForm />
+        <div className="w-full max-w-md my-auto pb-12 pt-8">
+          <AuthForm />
+        </div>
       </section>
 
     </div>
