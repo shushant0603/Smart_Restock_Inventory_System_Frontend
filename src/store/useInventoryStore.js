@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getProducts, createProduct } from "../services/productService";
+import { getProducts, createProduct, updateProduct } from "../services/productService";
 
 export const useInventoryStore = create((set, get) => ({
 	products: [],
@@ -32,6 +32,21 @@ export const useInventoryStore = create((set, get) => ({
 			return newProduct;
 		} catch (error) {
 			set({ error: error.message || "Failed to add product", loading: false });
+			throw error;
+		}
+	},
+
+	editProduct: async (id, payload) => {
+		try {
+			set({ loading: true, error: null });
+			const updated = await updateProduct(id, payload);
+			set((state) => ({
+				products: state.products.map((p) => (p.id === id ? updated : p)),
+				loading: false,
+			}));
+			return updated;
+		} catch (error) {
+			set({ error: error.message || "Failed to update product", loading: false });
 			throw error;
 		}
 	},

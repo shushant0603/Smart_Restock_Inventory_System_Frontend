@@ -39,15 +39,15 @@ export const createProduct = (payload) => {
 //   });
 // };
 
-// export const updateProduct = (id, payload) => {
-//   return request(`/api/products/${id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(payload),
-//   });
-// };
+export const updateProduct = (id, payload) => {
+  return request(`/api/products/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+};
 
 // export const deleteProduct = (id) => {
 //   return request(`/api/products/${id}`, {

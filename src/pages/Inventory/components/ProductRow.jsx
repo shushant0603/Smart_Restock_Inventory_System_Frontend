@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { Eye, Edit2, RefreshCw } from "lucide-react";
 import ProductStatusBadge from "./ProductStatusBadge";
+import EditProductModal from "./EditProductModal";
+import ViewProductModal from "./ViewProductModal";
 
 function ProductRow({ product }) {
 	const {
@@ -9,6 +12,9 @@ function ProductRow({ product }) {
 		currentStock,
 		minimumStock,
 	} = product;
+	
+	const [isEditOpen, setIsEditOpen] = useState(false);
+	const [isViewOpen, setIsViewOpen] = useState(false);
 
 	return (
 		<div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] items-center border-t border-gray-200 px-6 py-4 hover:bg-gray-50">
@@ -55,16 +61,28 @@ function ProductRow({ product }) {
 
 			{/* Actions */}
 			<div className="flex items-center gap-3">
-				<button type="button" className="text-gray-400 hover:text-blue-600">
+				<button type="button" onClick={() => setIsViewOpen(true)} className="text-gray-400 hover:text-blue-600">
 					<Eye className="h-4 w-4" />
 				</button>
-				<button type="button" className="text-gray-400 hover:text-gray-900">
+				<button type="button" onClick={() => setIsEditOpen(true)} className="text-gray-400 hover:text-gray-900">
 					<Edit2 className="h-4 w-4" />
 				</button>
 				<button type="button" className="text-gray-400 hover:text-blue-600">
 					<RefreshCw className="h-4 w-4" />
 				</button>
 			</div>
+
+			{/* Modals */}
+			<EditProductModal 
+				isOpen={isEditOpen} 
+				onClose={() => setIsEditOpen(false)} 
+				product={product} 
+			/>
+			<ViewProductModal 
+				isOpen={isViewOpen} 
+				onClose={() => setIsViewOpen(false)} 
+				product={product} 
+			/>
 		</div>
 	);
 }
