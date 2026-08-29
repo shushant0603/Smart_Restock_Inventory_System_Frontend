@@ -71,3 +71,4 @@ This project was developed by our amazing team. You can find our GitHub profiles
 - [Goutam Dogri](https://github.com/goutamdogri)
 - [Soham bhattacharjee](https://github.com/Soh-am)
 - [Priya Gupta](https://github.com/priyagupta35)
+- [Soumyajit Singha](https://github.com/soumyajitsing-hash)
